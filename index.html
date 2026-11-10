@@ -93,7 +93,8 @@
 <body>
 
     <div class="card" id="mainCard">
-        <h1>🤣😂빼빼로 데이가 당신을 속였습니🤣😂</h1>
+        <!-- 처음 문구 -->
+        <h1 id="titleText">빼빼로 데이가 당신을...</h1>
         <div class="image-container">
             <!-- 초기 빼빼로 사진 -->
             <img id="peperoImage" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&auto=format&fit=crop&q=60" alt="빼빼로">
@@ -105,21 +106,25 @@
         const loveBtn = document.getElementById('loveBtn');
         const mainCard = document.getElementById('mainCard');
         const peperoImage = document.getElementById('peperoImage');
+        const titleText = document.getElementById('titleText');
 
-        // 자바스크립트로 오디오 객체 생성 및 무한 반복 설정
+        // 오디오 객체 생성 및 무한 반복 설정 (동일 폴더 내 오디오 파일 기준)
         const memeAudio = new Audio('cat-laugh-meme-1.mp3');
         memeAudio.loop = true;
 
         loveBtn.addEventListener('click', () => {
-            // 1. 고양이 밈 이미지로 변경[cite: 1]
+            // 1. 문구 변경
+            titleText.innerText = "빼빼로 데이가 당신을 사랑합니다";
+
+            // 2. 고양이 밈 이미지로 변경[cite: 1]
             peperoImage.src = "images.jpeg";
             
-            // 2. 소리 재생[cite: 2]
+            // 3. 소리 재생[cite: 2]
             memeAudio.play().catch(error => {
                 console.log("자동 재생이 차단되었습니다:", error);
             });
 
-            // 3. 버튼 숨기기 및 공유 메시지 생성
+            // 4. 버튼 숨기기 및 공유 메시지 생성
             loveBtn.style.display = 'none';
 
             const shareDiv = document.createElement('div');
