@@ -60,9 +60,6 @@
             background-color: #c2185b;
             transform: scale(1.05);
         }
-        .hidden {
-            display: none;
-        }
         .share-section {
             margin-top: 20px;
             animation: fadeIn 0.5s ease-in-out;
@@ -98,28 +95,26 @@
     <div class="card" id="mainCard">
         <h1>빼빼로 데이가 당신을...</h1>
         <div class="image-container">
-            <!-- 초기 빼빼로 사진 (예시 이미지 링크) -->
+            <!-- 초기 빼빼로 사진 -->
             <img id="peperoImage" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&auto=format&fit=crop&q=60" alt="빼빼로">
         </div>
         <button class="btn" id="loveBtn">달콤한 마음 받기</button>
     </div>
 
-    <!-- 오디오 요소 (밈 웃음소리)[cite: 2] -->
-    <audio id="memeAudio" loop>
-        <source src="data:audio/mp3;base64,...(음원 데이터)..." type="audio/mpeg">
-    </audio>
-
     <script>
         const loveBtn = document.getElementById('loveBtn');
         const mainCard = document.getElementById('mainCard');
         const peperoImage = document.getElementById('peperoImage');
-        const memeAudio = document.getElementById('memeAudio');
+
+        // 자바스크립트로 오디오 객체 생성 및 무한 반복 설정
+        const memeAudio = new Audio('cat-laugh-meme-1.mp3');
+        memeAudio.loop = true;
 
         loveBtn.addEventListener('click', () => {
             // 1. 고양이 밈 이미지로 변경[cite: 1]
-            peperoImage.src = "images.jpeg"; // 업로드하신 고양이 밈 이미지 파일명
+            peperoImage.src = "images.jpeg";
             
-            // 2. 소리 무한 재생 시작[cite: 2]
+            // 2. 소리 재생[cite: 2]
             memeAudio.play().catch(error => {
                 console.log("자동 재생이 차단되었습니다:", error);
             });
