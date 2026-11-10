@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>빼빼로데이 깜짝 이벤트</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #4a4a4a;
+            overflow: hidden;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: #d81b60;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .image-container {
+            margin-bottom: 25px;
+        }
+        .image-container img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        .btn {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+        }
+        .btn:hover {
+            background-color: #c2185b;
+            transform: scale(1.05);
+        }
+        .hidden {
+            display: none;
+        }
+        .share-section {
+            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .share-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ad1457;
+            margin-bottom: 10px;
+        }
+        .share-btn {
+            background-color: #ffb300;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .share-btn:hover {
+            background-color: #ffa000;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <h1>빼빼로 데이가 당신을...</h1>
+        <div class="image-container">
+            <!-- 초기 빼빼로 사진 (예시 이미지 링크) -->
+            <img id="peperoImage" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&auto=format&fit=crop&q=60" alt="빼빼로">
+        </div>
+        <button class="btn" id="loveBtn">달콤한 마음 받기</button>
+    </div>
+
+    <!-- 오디오 요소 (밈 웃음소리)[cite: 2] -->
+    <audio id="memeAudio" loop>
+        <source src="data:audio/mp3;base64,...(음원 데이터)..." type="audio/mpeg">
+    </audio>
+
+    <script>
+        const loveBtn = document.getElementById('loveBtn');
+        const mainCard = document.getElementById('mainCard');
+        const peperoImage = document.getElementById('peperoImage');
+        const memeAudio = document.getElementById('memeAudio');
+
+        loveBtn.addEventListener('click', () => {
+            // 1. 고양이 밈 이미지로 변경[cite: 1]
+            peperoImage.src = "images.jpeg"; // 업로드하신 고양이 밈 이미지 파일명
+            
+            // 2. 소리 무한 재생 시작[cite: 2]
+            memeAudio.play().catch(error => {
+                console.log("자동 재생이 차단되었습니다:", error);
+            });
+
+            // 3. 버튼 숨기기 및 공유 메시지 생성
+            loveBtn.style.display = 'none';
+
+            const shareDiv = document.createElement('div');
+            shareDiv.className = 'share-section';
+            shareDiv.innerHTML = `
+                <div class="share-text">🎉 다른 사람한테도 공유하세요!</div>
+                <button class="share-btn" id="copyLinkBtn">링크 복사하기</button>
+            `;
+            mainCard.appendChild(shareDiv);
+
+            // 링크 복사 기능
+            document.getElementById('copyLinkBtn').addEventListener('click', () => {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('링크가 복사되었습니다!');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
